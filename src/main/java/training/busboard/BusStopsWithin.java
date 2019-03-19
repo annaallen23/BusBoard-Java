@@ -2,6 +2,11 @@ package training.busboard;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.core.MediaType;
+import java.util.Comparator;
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 
 public class BusStopsWithin {
@@ -23,4 +28,6 @@ public class BusStopsWithin {
     public double getDistance() {
         return distance;
     }
+
+
 }
