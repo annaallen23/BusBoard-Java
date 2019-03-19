@@ -23,7 +23,7 @@ public class GetBusStops {
                 .getStopPoints();
 
         locateStopsWithin1000Meters.sort(Comparator.comparing(BusStopsWithin::getDistance));
-        return locateStopsWithin1000Meters;
+        return locateStopsWithin1000Meters.subList(0,2);
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)

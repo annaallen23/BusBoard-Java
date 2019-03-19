@@ -24,23 +24,16 @@ public class Main {
 
         PostcodeLocator location = GetLocation.getLonAndLat(client, postcodeInput);
         List<BusStopsWithin> busStops = GetBusStops.locateStopsWithin1000Meters(client, location.getLatitude(), location.getLongitude());
-        System.out.println(busStops);
+
+        for (BusStopsWithin busStop : busStops) {
+            System.out.println(busStop.getCommonName());
+            List<ArrivalPrediction> arrivals = GetArrivalPredictions.getArrivals(client, busStop.getNaptanId());
+            for (ArrivalPrediction arrival : arrivals) {
+                System.out.println(arrival.getLineName() + " towards " + arrival.getDestinationName() + " arriving in " + arrival.getTimeToStation() / 60 + " minutes. ");
+            }
 
 
-        //Jersey won't read string change to List
-        /*List <ArrivalPrediction> response = client.target("https://api.tfl.gov.uk/StopPoint")
-                //adds on scanner input in URL
-                .path(busstopcodeInput)
-                .path("Arrivals")
-                //Application_JSON_type tells Jersey you're reading JSON
-                .request(MediaType.APPLICATION_JSON_TYPE)
-                // Generictype tells jersey to accept list
-                .get(new GenericType<List<ArrivalPrediction>>(){});
-
-        // remember Comparator.comparing compares getTimeToStation within list responses and sorts ascending
-        response.sort(Comparator.comparing(ArrivalPrediction::getTimeToStation));
-        // prints our first 5 responses
-        System.out.println(response.subList(0,5));*/
+        }
     }
 }
 

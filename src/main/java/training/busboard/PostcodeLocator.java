@@ -23,9 +23,4 @@ public class PostcodeLocator {
     public double getLatitude() {
         return latitude;
     }
-
-    private Scanner postcodeScanner = new Scanner(System.in);
-    private String postcodeInput = postcodeScanner.next();
-
-
 }
