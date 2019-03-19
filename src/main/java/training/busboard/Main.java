@@ -23,7 +23,7 @@ public class Main {
         Scanner postcodeScanner = new Scanner(System.in);
         String postcodeInput = postcodeScanner.next();
 
-        PostcodeLocator location = client.target("https://api.postcodes.io/postcodes/")
+        PostcodeLocator location = client.target("https://api.postcodes.io/postcodes")
                 //adds on scanner input in URL
                 .path(postcodeInput)
                 //Application_JSON_type tells Jersey you're reading JSON
@@ -32,7 +32,22 @@ public class Main {
                 .getResult();
         double longitude = location.getLongitude();
         double latitude = location.getLatitude();
-        System.out.println(location.getLatitude() + " " + location.getLongitude());
+
+        List<BusStopsWithin> locateStopsWithin1000Meters = client.target("https://api.tfl.gov.uk/StopPoint")
+                //?stopTypes=NaptanPublicBusCoachTram&radius=1000&lat=")
+                .queryParam("stopTypes", "NaptanPublicBusCoachTram")
+                .queryParam("radius", "1000")
+                .queryParam("lat", latitude)
+                .queryParam("lon", longitude)
+
+                //Application_JSON_type tells Jersey you're reading JSON
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .get(StopPoints.class)
+                .getStopPoints();
+
+        locateStopsWithin1000Meters.sort(Comparator.comparing(BusStopsWithin::getDistance));
+        System.out.println(locateStopsWithin1000Meters.subList(0,2));
+
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
@@ -46,7 +61,17 @@ public class Main {
             return result;
         }
     }
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    private static class StopPoints {
 
+        private List <BusStopsWithin> stopPoints;
+
+        private StopPoints() { }
+
+        public List<BusStopsWithin> getStopPoints() {
+            return stopPoints;
+        }
+    }
 
 
 
