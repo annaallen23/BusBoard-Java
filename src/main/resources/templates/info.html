@@ -14,7 +14,6 @@
             <div id="title">
             <h1>Bus Information for Postcode  <span th:text="${busInfo.postcode}"></span> </h1>
             </div>
-            <br>
             <div>
                 <div th:each="stopAndArrivals : ${busInfo.stopsAndArrivals}">
                     <h3><b>Departure Board for Bus Stop:
@@ -27,8 +26,17 @@
                         </div>
                     </div>
                     </div>
-                    <br>
-                <img src="https://media.giphy.com/media/h6bZANuVGe1ZC/giphy.gif" alt="Bus Image" style="width:500px;height:300px;" id="center">
+                        <div class="row">
+                    <div class="column">
+                        <img src="https://media.giphy.com/media/h6bZANuVGe1ZC/giphy.gif" alt="Bus Image" style="width:250px;height:150px;">
+                    </div>
+                    <div class="column">
+                        <img src="https://media.giphy.com/media/h6bZANuVGe1ZC/giphy.gif" alt="Bus Image" style="width:250px;height:150px;">
+                    </div>
+                    <div class="column">
+                        <img src="https://media.giphy.com/media/h6bZANuVGe1ZC/giphy.gif" alt="Bus Image" style="width:250px;height:150px;">
+                    </div>
+                </div>
             </div>
 
         </div>
