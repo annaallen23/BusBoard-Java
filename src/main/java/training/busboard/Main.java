@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String args[]) {
+    public static void main(String args[]) throws Exception {
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
 
         System.out.println("Please enter Postcode:");

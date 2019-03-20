@@ -24,17 +24,23 @@ public class Website {
     }
 
     @RequestMapping("/busInfo")
-    ModelAndView busInfo(@RequestParam("postcode") String postcode) {
+    ModelAndView busInfo(@RequestParam("postcode") String postcode) throws Exception {
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
-        PostcodeLocator location = GetLocation.getLonAndLat(client, postcode);
-        List<BusStop> busStops = GetBusStops.locateStopsWithin1000Meters(client, location.getLatitude(), location.getLongitude());
-        List<StopAndArrivals> stopsAndArrivals= new ArrayList<>();
-        for (BusStop busStop : busStops) {
-            List<ArrivalPrediction> arrivalsForThisStop = GetArrivalPredictions.getArrivals(client, busStop.getNaptanId());
-            stopsAndArrivals.add(new StopAndArrivals(arrivalsForThisStop, busStop));
-        }
 
-        return new ModelAndView("info", "busInfo", new BusInfo(postcode, stopsAndArrivals));
+        try {
+            PostcodeLocator location = GetLocation.getLonAndLat(client, postcode);
+            List<BusStop> busStops = GetBusStops.locateStopsWithin1000Meters(client, location.getLatitude(), location.getLongitude());
+            List<StopAndArrivals> stopsAndArrivals = new ArrayList<>();
+            for (BusStop busStop : busStops) {
+                List<ArrivalPrediction> arrivalsForThisStop = GetArrivalPredictions.getArrivals(client, busStop.getNaptanId());
+                stopsAndArrivals.add(new StopAndArrivals(arrivalsForThisStop, busStop));
+            }
+
+            return new ModelAndView("info", "busInfo", new BusInfo(postcode, stopsAndArrivals));
+        }
+        catch (Exception e){
+            return new ModelAndView("error", "errorInfo", new ErrorInfo(e.getMessage()));
+        }
     }
 
 

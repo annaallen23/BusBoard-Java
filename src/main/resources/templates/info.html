@@ -11,14 +11,14 @@
     </head>
     <body>
         <div layout:fragment="content" class="container body-content">
-            <h1>Bus Information</h1>
+            <h1 style="background-color:PaleVioletRed;">Bus Information</h1>
             <div>
                 <p>You entered postcode <span th:text="${busInfo.postcode}"></span></p>
                 <div th:each="stopAndArrivals : ${busInfo.stopsAndArrivals}">
                     <h3><b>Departure Board for
-                        <span th:text="${stopAndArrivals.stop.commonName}"></span>
+                        <span style="background-color:rgba(219,112,147,0.5);" th:text="${stopAndArrivals.stop.commonName}"></span>
                     </b></h3>
-                    <div th:each="arrival : ${stopAndArrivals.arrivals}">
+                    <div style="background-color:rgba(219,122,147,0.25);" th:each="arrival : ${stopAndArrivals.arrivals}">
                         <p>The <b><span th:text="${arrival.lineName}"></span></b> service to <b><span th:text="${arrival.destinationName}"></span></b> is arriving in <b><span th:text="${arrival.timeToStation}"></span></b> mins</p>
                     </div>
                     <br>
