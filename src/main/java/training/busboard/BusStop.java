@@ -9,13 +9,13 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 
-public class BusStopsWithin {
+public class BusStop {
 
     private String naptanId;
     private String commonName;
     private double distance;
 
-    private BusStopsWithin (){}
+    private BusStop(){}
 
     public String getNaptanId() {
         return naptanId;

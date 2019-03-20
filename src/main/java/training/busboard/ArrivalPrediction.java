@@ -22,7 +22,7 @@ public class ArrivalPrediction {
     }
 
     public int getTimeToStation() {
-        return timeToStation;
+        return timeToStation/60;
     }
 }
 

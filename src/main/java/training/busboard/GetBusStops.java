@@ -9,8 +9,8 @@ import java.util.List;
 
 public class GetBusStops {
 
-    public static List<BusStopsWithin> locateStopsWithin1000Meters (Client client, double latitude, double longitude) {
-        List<BusStopsWithin> locateStopsWithin1000Meters = client.target("https://api.tfl.gov.uk/StopPoint")
+    public static List<BusStop> locateStopsWithin1000Meters (Client client, double latitude, double longitude) {
+        List<BusStop> locateStopsWithin1000Meters = client.target("https://api.tfl.gov.uk/StopPoint")
                 //queryParam replaces = in URL
                 .queryParam("stopTypes", "NaptanPublicBusCoachTram")
                 .queryParam("radius", "1000")
@@ -22,18 +22,18 @@ public class GetBusStops {
                 .get(StopPoints.class)
                 .getStopPoints();
 
-        locateStopsWithin1000Meters.sort(Comparator.comparing(BusStopsWithin::getDistance));
+        locateStopsWithin1000Meters.sort(Comparator.comparing(BusStop::getDistance));
         return locateStopsWithin1000Meters.subList(0,2);
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     private static class StopPoints {
 
-        private List <BusStopsWithin> stopPoints;
+        private List <BusStop> stopPoints;
 
         private StopPoints() { }
 
-        public List<BusStopsWithin> getStopPoints() {
+        public List<BusStop> getStopPoints() {
             return stopPoints;
         }
     }

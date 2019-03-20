@@ -27,14 +27,14 @@ public class Website {
     ModelAndView busInfo(@RequestParam("postcode") String postcode) {
         Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
         PostcodeLocator location = GetLocation.getLonAndLat(client, postcode);
-        List<BusStopsWithin> busStops = GetBusStops.locateStopsWithin1000Meters(client, location.getLatitude(), location.getLongitude());
-        List<List<ArrivalPrediction>> arrivals = new ArrayList<>();
-        for (BusStopsWithin busStop : busStops) {
+        List<BusStop> busStops = GetBusStops.locateStopsWithin1000Meters(client, location.getLatitude(), location.getLongitude());
+        List<StopAndArrivals> stopsAndArrivals= new ArrayList<>();
+        for (BusStop busStop : busStops) {
             List<ArrivalPrediction> arrivalsForThisStop = GetArrivalPredictions.getArrivals(client, busStop.getNaptanId());
-            arrivals.add(arrivalsForThisStop);
+            stopsAndArrivals.add(new StopAndArrivals(arrivalsForThisStop, busStop));
         }
 
-        return new ModelAndView("info", "busInfo", new BusInfo(postcode, arrivals, busStops));
+        return new ModelAndView("info", "busInfo", new BusInfo(postcode, stopsAndArrivals));
     }
 
 
