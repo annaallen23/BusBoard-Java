@@ -1,0 +1,23 @@
+#displayBusInfo {
+    background-color: paleturquoise;
+}
+h3 {
+    background-color: darkturquoise;
+    text-emphasis-color: turquoise;
+}
+#title {
+    background-color: darkturquoise;
+    text-align: center;
+
+}
+#center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+body {
+    background-image: url("https://media.timeout.com/images/101897967/1372/772/image.jpg");
+    background-color: #cccccc;
+}

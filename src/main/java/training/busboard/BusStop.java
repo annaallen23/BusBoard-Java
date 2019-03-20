@@ -14,6 +14,7 @@ public class BusStop {
     private String naptanId;
     private String commonName;
     private double distance;
+    private List<AdditionalProperties> additionalProperties;
 
     private BusStop(){}
 
@@ -29,5 +30,11 @@ public class BusStop {
         return distance;
     }
 
+    public long getRoundedDistance() {
+        return Math.round(distance);
+    }
 
+    public List<AdditionalProperties> getAdditionalProperties() {
+        return additionalProperties;
+    }
 }

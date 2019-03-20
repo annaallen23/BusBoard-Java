@@ -22,11 +22,12 @@ public class Main {
         for (BusStop busStop : busStops) {
             System.out.println(busStop.getCommonName());
             List<ArrivalPrediction> arrivals = GetArrivalPredictions.getArrivals(client, busStop.getNaptanId());
+
             for (ArrivalPrediction arrival : arrivals) {
-                System.out.println(arrival.getLineName() + " towards " + arrival.getDestinationName() + " arriving in " + arrival.getTimeToStation() / 60 + " minutes. ");
+                System.out.println(arrival.getLineName() + " towards " + arrival.getDestinationName() + "distance " + busStop.getRoundedDistance() + " arriving in " + arrival.getTimeToStation() / 60 + " minutes. ");
+
+
             }
-
-
         }
     }
 }
