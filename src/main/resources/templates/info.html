@@ -3,43 +3,39 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout">
 
-    <!--@thymesVar id="busInfo" type="training.busboard.web.BusInfo"-->
-
-    <head>
-        <meta http-equiv="refresh" content="30">
-        <title>Bus Information</title>
-    </head>
-    <body>
-        <div layout:fragment="content" class="container body-content">
-            <div id="title">
-            <h1>Bus Information for Postcode  <span th:text="${busInfo.postcode}"></span> </h1>
-            </div>
-            <div>
-                <div th:each="stopAndArrivals : ${busInfo.stopsAndArrivals}">
-                    <h3><b>Departure Board for Bus Stop:
-                        <span th:text="${stopAndArrivals.stop.commonName}"></span> <small>distance
-                        <span th:text="${stopAndArrivals.stop.roundedDistance}"></span>m </small>
-                    </b></h3>
-                    <div id="displayBusInfo">
-                        <div th:each="arrival : ${stopAndArrivals.arrivals}">
-                             <p>The <b><span th:text="${arrival.lineName}"></span></b> service to <b><span th:text="${arrival.destinationName}"></span></b> is arriving in <b><span th:text="${arrival.timeToStation}"></span></b> mins</p>
-                        </div>
-                    </div>
-                    </div>
-                        <div class="row">
-                    <div class="column">
-                        <img src="https://media.giphy.com/media/h6bZANuVGe1ZC/giphy.gif" alt="Bus Image" style="width:250px;height:150px;">
-                    </div>
-                    <div class="column">
-                        <img src="https://media.giphy.com/media/h6bZANuVGe1ZC/giphy.gif" alt="Bus Image" style="width:250px;height:150px;">
-                    </div>
-                    <div class="column">
-                        <img src="https://media.giphy.com/media/h6bZANuVGe1ZC/giphy.gif" alt="Bus Image" style="width:250px;height:150px;">
-                    </div>
+<!--@thymesVar id="busInfo" type="training.busboard.web.BusInfo"-->
+<head>
+    <title>Bus Information</title>
+</head>
+<body>
+<br>
+<div layout:fragment="content" class="container body-content">
+    <div id="title">
+        <h1>Bus Information for Postcode <span th:text="${busInfo.postcode}"></span></h1>
+    </div>
+    <div style="position: relative">
+        <div th:each="stopAndArrivals : ${busInfo.stopsAndArrivals}">
+            <h3><b>Departure Board for Bus Stop:
+                <span th:text="${stopAndArrivals.stop.commonName}"></span>
+                <small>distance
+                    <span th:text="${stopAndArrivals.stop.roundedDistance}"></span>m
+                </small>
+            </b></h3>
+            <div id="displayBusInfo">
+                <div th:each="arrival : ${stopAndArrivals.arrivals}">
+                    <h4><p>The <b><span th:text="${arrival.lineName}"></span></b> service to <b><span
+                            th:text="${arrival.destinationName}"></span></b> is arriving in <b><span
+                            th:text="${arrival.timeToStation}"></span></b> mins</p></h4>
                 </div>
             </div>
-
         </div>
+        <br>
+        <br>
+        <br>
+        <img class="driving-bus" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/6b64cd17418021.562b9bf034340.gif">
+    </div>
+</div>
 
-    </body>
+</body>
+
 </html>

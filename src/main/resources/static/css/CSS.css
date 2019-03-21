@@ -1,38 +1,42 @@
 #displayBusInfo {
-    background-color: rgba(240,248,255,50);
+    background-color: transparent;
 }
 h3 {
-    background-color: rgba(135,206,250,50);
+    background-color: powderblue;
     text-emphasis-color: turquoise;
 }
 #title {
-    background-color: rgba(30,144,255,25);
+    background-color: #117a8b;
     text-align: center;
 
 }
-img {
-    float: right;
-}
-#center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-}
 
 body {
-    background-image: url("https://media.timeout.com/images/101897967/1372/772/image.jpg");
+    background-image: url(https://media.timeout.com/images/103871469/1372/772/image.jpg);
     background-color: #cccccc;
 }
 
-.column {
-    float: left;
-    width: 33.33%;
-    padding: 5px;
+@keyframes drive {
+    0% { left: 0; margin-left: 0; transform: scaleX(0); }
+    5% { left: 0; margin-left: 0; transform: scaleX(-1); }
+    45% { left: 100%; margin-left: -200px; transform: scaleX(-1); }
+    55% { left: 100%; margin-left: -200px; transform: none; }
+    95% { left: 0; margin-left: 0; transform: none; }
+    100% { left: 0; margin-left: 0; transform: scaleX(0); }
 }
 
-.row::after {
-    content: "";
-    clear: both;
-    display: table;
+.driving-bus {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    background-color: transparent;
+    animation: drive 30s linear infinite;
 }
+nav{
+    position: fixed;
+    bottom: -760px;
+    width: 100%;
+}
+
+
+/*https://media.giphy.com/media/h6bZANuVGe1ZC/giphy.gif" alt="Bus Image" style="width:250px;height:150px;*/
